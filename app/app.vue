@@ -1,7 +1,7 @@
 <template>
-  <div>
-    WQeqewqe
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup>
