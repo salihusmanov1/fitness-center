@@ -40,7 +40,7 @@
       id="links"
       class="text-neutral-content"
     >
-      <ul class="flex gap-12 text-sm font-light">
+      <ul class="grid grid-cols-1 sm:grid-cols-5 gap-x-12 gap-y-6 text-center text-sm font-light">
         <li>
           <a
             href="#"
