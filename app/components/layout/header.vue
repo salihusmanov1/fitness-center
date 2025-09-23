@@ -1,10 +1,10 @@
 <template>
   <nav
-    class="navbar justify-between shadow-sm p-0 h-20"
+    class="fixed top-0 z-50 navbar justify-between p-0 h-20 bg-base-300"
     aria-label="Main navigation"
   >
-    <div class="lg:navbar-start w-full hidden">
-      <ul class="flex items-center gap-8 px-4 ">
+    <div class="lg:inline-flex items-center justify-start w-[70%] hidden">
+      <ul class="flex items-center gap-8 px-4 w-full">
         <li
           v-for="(list, index) in navList"
           :key="index"
@@ -19,7 +19,7 @@
       </ul>
     </div>
 
-    <div class="navbar-end h-full w-full lg:w-auto">
+    <div class="inline-flex h-full w-full lg:w-[auto]">
       <div class="px-6 hidden lg:flex">
         <button
           class="group text-primary flex items-center gap-2 cursor-pointer"

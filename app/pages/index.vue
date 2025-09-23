@@ -1,6 +1,10 @@
 <template>
   <div>
     <HomeHero />
+    <HomeMain />
+    <HomeCarousel />
+    <HomePlans />
+    <HomeDownloadApp />
   </div>
 </template>
 

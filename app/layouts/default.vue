@@ -4,7 +4,10 @@
     class="bg-base-300"
   >
     <LayoutHeader />
-    <slot />
+    <main class="mt-20">
+      <slot />
+    </main>
+    <LayoutFooter />
   </div>
 </template>
 
