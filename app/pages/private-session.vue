@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4">
+  <div class="p-4">
     <section class="h-[380px] text-center flex flex-col items-center gap-4 justify-end">
       <h1 class="sm:text-9xl text-6xl font-bold stretched-text tracking-tighter scale-y-105 italic">
         PRIVATE SESSION
@@ -27,7 +27,10 @@
           <p>ONE ON ONE SESSION</p>
           <p>1 hour</p>
           <p>30$</p>
-          <button class="btn btn-primary stretched-text tracking-tighter text-lg">
+          <button
+            class="btn btn-primary stretched-text tracking-tighter text-lg"
+            @click="navigateTo('/session/1')"
+          >
             Book Now
           </button>
         </div>
