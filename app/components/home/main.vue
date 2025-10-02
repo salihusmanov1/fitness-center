@@ -7,7 +7,7 @@
           class="w-full h-full object-cover"
         />
       </div>
-      <article class="flex-1 flex justify-center items-center text-center lg:text-start">
+      <article class="flex justify-center items-center text-center lg:text-start">
         <div class="w-[74%] space-y-4">
           <Icon
             name="bx:dumbbell"
