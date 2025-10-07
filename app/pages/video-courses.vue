@@ -9,67 +9,97 @@
         Let your users get to know you.
       </p>
     </section>
-    <section
-      v-for="(slide, index) in slides"
+    <VideoCoursesCourse
+      v-for="(course, index) in courses"
       :key="index"
-    >
-      <div class="w-full h-[626px] relative">
-        <NuxtImg
-          :src="slide.img"
-          alt="Video Course 1"
-          class="w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 bg-black/50" />
-        <div class="absolute inset-0 flex flex-col items-center justify-end z-10 text-center p-10">
-          <div class="flex flex-col items-center justify-center">
-            <h2 class="text-white stretched-text sm:text-7xl text-5xl font-semibold scale-y-105">
-              {{ slide.header }}
-            </h2>
-            <div class="flex flex-col sm:flex-row items-center gap-12 my-8 text-white sm:text-lg text-base">
-              <a class="flex items-center gap-2">
-                <Icon
-                  name="bx:play-circle"
-                  size="48px"
-                />
-                <span class="link underline-offset-4">Watch Preview</span>
-              </a>
-              <a class="link underline-offset-4">
-                {{ slide.text }}
-              </a>
-            </div>
-          </div>
-
-          <div class="mt-30">
-            <button class="btn btn-outline btn-lg font-light text-white">
-              All Videos
-              <Icon
-                name="bx:plus"
-                size="18px"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+      :course="course"
+    />
   </div>
 </template>
 
 <script setup>
-const slides = [
+const courses = [
   {
     img: "/video-courses-1.jpg",
     header: "Beginners Class 02",
     text: "Subscribe $9.99/mo.",
+    children: [
+      {
+        title: "Video 1",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-1.jpg",
+        header: "Beginners Class 01 / 00:32",
+        text: "Rent $2.99",
+      },
+      {
+        title: "Video 2",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-2.jpg",
+        header: "Beginners Class 02 / 00:29",
+        text: "Rent $2.99",
+      },
+      {
+        title: "Video 3",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-3.jpg",
+        header: "Beginners Class 03 / 00:29",
+        text: "Rent $2.99",
+      },
+    ],
   },
+
   {
     img: "/video-courses-2.jpg",
     header: "ADVANCED COURSE",
     text: "Subscribe $10.99/mo.",
+    children: [
+      {
+        title: "Video 1",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-1.jpg",
+        header: "The Challenge - Week 1 / 00:32",
+        text: "Rent $2.99",
+      },
+      {
+        title: "Video 2",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-2.jpg",
+        header: "The Challenge - Week 2 / 00:29",
+        text: "Rent $2.99",
+      },
+      {
+        title: "Video 3",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-1.jpg",
+        header: "The Challenge - Week 3 / 00:29",
+        text: "Rent $2.99",
+      },
+    ],
   },
   {
     img: "/video-courses-3.jpg",
     header: "The 3 MONTH CHALLENGE",
     text: "Subscribe $12.99/mo.",
+    children: [
+      {
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-1.jpg",
+        header: "The Challenge - Week 1 / 00:32",
+        text: "Rent $2.99",
+      },
+      {
+        header: "The Challenge - Week 2 / 00:29",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-2.jpg",
+        text: "Rent $2.99",
+      },
+      {
+        header: "The Challenge - Week 3 / 00:29",
+        text: "Rent $2.99",
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        thumbnail: "/video-courses-3.jpg",
+      },
+    ],
   },
 ];
 </script>

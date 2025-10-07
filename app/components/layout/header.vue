@@ -21,7 +21,8 @@
 
     <div class="inline-flex h-full w-full lg:w-[auto]">
       <div class="px-6 hidden lg:flex">
-        <button
+        <NuxtLink
+          to="/login"
           class="group text-primary flex items-center gap-2 cursor-pointer"
           aria-label="Log in"
         >
@@ -31,7 +32,7 @@
             size="32px"
           />
           <span class="group-hover:opacity-80">Log In</span>
-        </button>
+        </NuxtLink>
       </div>
       <div class="flex gap-8 bg-primary h-full justify-center items-center px-12 w-full lg:w-auto">
         <button
@@ -109,7 +110,8 @@
           values="M5 5L12 5L19 5M5 12H19M5 19L12 19L19 19;M5 5L12 12L19 5M12 12H12M5 19L12 12L19 19"
         /></path></svg>
       </button>
-      <button
+      <NuxtLink
+        to="/login"
         class="text-primary flex items-center gap-2 cursor-pointer"
         aria-label="Log In"
       >
@@ -119,7 +121,7 @@
           aria-hidden="true"
         />
         <span class="text-base">Log In</span>
-      </button>
+      </NuxtLink>
 
       <ul class="flex flex-col gap-4 text-end">
         <li
