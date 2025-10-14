@@ -4,7 +4,8 @@
     class="bg-base-300"
   >
     <LayoutHeader />
-    <main class="mt-20">
+    <LayoutNavbar />
+    <main class="lg:mt-20 mt-36">
       <slot />
     </main>
     <LayoutFooter />
