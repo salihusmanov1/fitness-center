@@ -22,7 +22,7 @@
     <div class="inline-flex h-full w-full lg:w-[auto]">
       <div class="px-6 hidden lg:flex">
         <NuxtLink
-          to="/login"
+          :to="isAuthenticated ? '/profile' : '/login'"
           class="group text-primary flex items-center gap-2 cursor-pointer"
           aria-label="Log in"
         >
@@ -31,7 +31,7 @@
             name="tdesign:user-circle-filled"
             size="32px"
           />
-          <span class="group-hover:opacity-80">Log In</span>
+          <span class="group-hover:opacity-80">{{ isAuthenticated ? "Profile" : "Log In" }}</span>
         </NuxtLink>
       </div>
       <div class="flex gap-8 bg-primary h-full justify-center items-center px-12 w-full lg:w-auto">
@@ -111,7 +111,7 @@
         /></path></svg>
       </button>
       <NuxtLink
-        to="/login"
+        :to="isAuthenticated ? '/profile' : '/login'"
         class="text-primary flex items-center gap-2 cursor-pointer"
         aria-label="Log In"
       >
@@ -120,7 +120,7 @@
           size="24px"
           aria-hidden="true"
         />
-        <span class="text-base">Log In</span>
+        <span class="text-base">{{ isAuthenticated ? "Profile" : "Log In" }}</span>
       </NuxtLink>
 
       <ul class="flex flex-col gap-4 text-end">
@@ -138,6 +138,7 @@
 </template>
 
 <script setup>
+const { isAuthenticated } = useSanctumAuth();
 const isSidebarOpen = ref(false);
 const navList = [
   {
@@ -145,16 +146,8 @@ const navList = [
     to: "/",
   },
   {
-    label: "VIDEO COURSES",
-    to: "/video-courses",
-  },
-  {
-    label: "PRIVATE SESSION",
-    to: "/private-session",
-  },
-  {
-    label: "CHALLENGES",
-    to: "/challenges",
+    label: "SESSIONS",
+    to: "/sessions",
   },
   {
     label: "PLANS & PRICING",

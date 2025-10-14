@@ -9,12 +9,36 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/test-utils",
     "nuxt-auth-sanctum",
+    [
+      "@vee-validate/nuxt",
+      {
+        autoImports: true,
+      },
+    ],
+    "@pinia/nuxt",
   ],
   devtools: { enabled: true },
+  app: {
+    head: {
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css",
+        },
+      ],
+      script: [
+        {
+          src: "https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js",
+          type: "text/javascript",
+          defer: true,
+        },
+      ],
+    },
+  },
   css: ["~/assets/css/main.css"],
   devServer: {
     host: "172.18.0.56",
-    port: 4000,
+    port: 5173,
   },
 
   compatibilityDate: "2025-07-15",
@@ -42,9 +66,9 @@ export default defineNuxtConfig({
     redirectIfUnauthenticated: false,
     endpoints: {
       csrf: "/sanctum/csrf-cookie",
-      login: "/login",
+      login: "/api/login",
       logout: "/logout",
-      user: "/api/user",
+      user: "/api/me",
     },
     csrf: {
       cookie: "XSRF-TOKEN",
