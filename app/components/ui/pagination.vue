@@ -5,8 +5,8 @@
     aria-label="Pagination Navigation"
   >
     <template
-      v-for="i in range"
-      :key="i"
+      v-for="(i, idx) in range"
+      :key="typeof i === 'number' ? `page-${i}` : `ellipsis-${idx}`"
     >
       <button
         class="join-item btn btn-ghost"
