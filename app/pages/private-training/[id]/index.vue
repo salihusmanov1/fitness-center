@@ -25,21 +25,13 @@
               <div>
                 <div class="border-b border-base-content pb-2 mb-4">
                   <p class="text-xl text-center">
-                    360° Virtual Tour of the Studio
+                    Select a Date and Time
                   </p>
                 </div>
-                <SessionPanoramaView src="/panorama-example.jpg" />
-              </div>
-
-              <div v-if="!isPilatesSession">
-                <div class="border-b border-base-content pb-2 mb-4">
-                  <p class="text-xl text-center">
-                    Equipment Selection
-                  </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <UiCalendar @update:model-value="updateSelectedDate" />
+                  <PtSessionAvailableTimes />
                 </div>
-                <SessionEquipmentSelection
-                  :equipment="session.data?.equipment || []"
-                />
               </div>
             </div>
           </div>
@@ -50,9 +42,8 @@
                 Service Details
               </p>
             </div>
-            <SessionDetails
-              :session="session.data"
-              :is-pilates-session="isPilatesSession"
+            <PtSessionDetails
+              :session="dummy"
               @navigate-next="navigateNext"
             />
           </div>
@@ -68,35 +59,30 @@ const route = useRoute();
 const router = useRouter();
 const { id } = route.params;
 
-const { data: session, error: sessionError } = await useAsyncData(`session-${id}`, () => client(`/api/class_sessions/${id}`));
+// const { data: session, error: sessionError } = await useAsyncData(`session-${id}`, () => client(`/api/class_sessions/${id}`));
 
-if (sessionError.value && sessionError.value.statusCode === 404) {
-  showError({
-    statusCode: 404,
-    statusMessage: "Session not found",
-  });
-}
+// if (sessionError.value && sessionError.value.statusCode === 404) {
+//   showError({
+//     statusCode: 404,
+//     statusMessage: "Session not found",
+//   });
+// }
 
-// Check if this is a Pilates session
-const isPilatesSession = computed(() => {
-  return session.value?.data?.class_type?.name?.toLowerCase().includes("pilates")
-    || session.value?.data?.name?.toLowerCase().includes("pilates");
-});
+const dummy = {
+  id: 1,
+  name: "Strength Training Fundamentals",
+  classType: "Strength Training",
+  description: "Learn proper form and technique for basic strength training exercises. Perfect for beginners looking to build a solid foundation.",
+  trainerName: "Mike Johnson",
+  price: 80,
+  currency: "USD",
+  duration_minutes: 60,
+  start_at: "2024-01-15T10:00:00Z",
+};
 
 const navigateNext = () => {
-  const query = {
-    date: selectedDateString.value,
-    time: selectedTime.value?.time,
-  };
-
-  // Add equipment selection for Pilates sessions
-  if (isPilatesSession.value && selectedEquipment.value) {
-    query.equipment = selectedEquipment.value.id;
-  }
-
   router.push({
-    path: `/session/${id}/booking`,
-    query,
+    path: `/private-training/${id}/booking`,
   });
 };
 
@@ -105,6 +91,6 @@ const goBack = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+  <style lang="scss" scoped>
 
-</style>
+  </style>

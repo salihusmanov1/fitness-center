@@ -11,10 +11,12 @@
       </p>
       <p class="px-2 py-4 text-primary bg-primary/10 text-sm">
         Already have an account?
-        <a
-          href="/"
-          class="underline"
-        >Log In</a> for faster booking.
+        <NuxtLink
+          to="/login"
+          class="underline text-primary"
+        >
+          Log In
+        </NuxtLink> for faster booking.
       </p>
 
       <div class="grid grid-cols-2 gap-6">

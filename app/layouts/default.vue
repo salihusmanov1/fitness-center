@@ -5,7 +5,7 @@
   >
     <LayoutHeader />
     <LayoutNavbar />
-    <main class="lg:mt-20 mt-36">
+    <main class="lg:mt-20 mt-36 min-h-screen">
       <slot />
     </main>
     <LayoutFooter />

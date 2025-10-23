@@ -1,4 +1,5 @@
 <template>
+  <NuxtLoadingIndicator color="#055b4a" />
   <NuxtLayout>
     <NuxtPage />
     <UiToast />
@@ -6,5 +7,5 @@
 </template>
 
 <script setup>
-
+import UiToast from "@/components/ui/toast.vue";
 </script>

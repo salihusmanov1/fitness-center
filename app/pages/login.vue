@@ -1,5 +1,5 @@
 <template>
-  <section class="p-4">
+  <section class="px-4 py-16">
     <div class="max-w-md mx-auto">
       <div class="w-full h-full flex justify-center items-center">
         <div class="w-full space-y-6">
@@ -54,13 +54,13 @@
             <button
               type="submit"
               class="btn btn-primary btn-block stretched-text text-lg mt-4"
-              :disabled="authStore.loading"
+              :disabled="isLoading"
             >
               <span
-                v-if="authStore.loading"
+                v-if="isLoading"
                 class="loading loading-spinner loading-sm"
               />
-              {{ authStore.loading ? 'Signing in...' : 'Sign In' }}
+              {{ submitButtonText }}
             </button>
           </form>
 
@@ -98,7 +98,7 @@
                 to="/register"
                 class="text-primary hover:opacity-80 transition-opacity font-medium"
               >
-                Sign up here
+                Sign up
               </NuxtLink>
             </p>
           </div>
@@ -109,44 +109,20 @@
 </template>
 
 <script setup>
-import { toTypedSchema } from "@vee-validate/yup";
-import * as yup from "yup";
+const {
+  email,
+  password,
+  rememberMe,
+  errors,
+  isLoading,
+  submitButtonText,
+  handleLogin,
+} = useLogin();
 
-const { success, error } = useToast();
-
-const authStore = useAuthStore();
-const { isAuthenticated, user } = useSanctumAuth();
-
-const schema = toTypedSchema(
-  yup.object({
-    email: yup.string().required("Email is required").email("Invalid email address"),
-    password: yup.string().required("Password is required"),
-  }),
-);
-
-const { errors, handleSubmit, defineField } = useForm({
-  validationSchema: schema,
+useHead({
+  title: "Login - NV Club",
+  meta: [
+    { name: "description", content: "Sign in to your NV Club account to access your workouts, sessions, and progress." },
+  ],
 });
-
-const [email] = defineField("email");
-const [password] = defineField("password");
-const [rememberMe] = defineField("rememberMe");
-
-const handleLogin = handleSubmit(async (values) => {
-  const { success: loginSuccess, message } = await authStore.login(values);
-  if (loginSuccess) {
-    success(message);
-  }
-  else {
-    error(message);
-    console.log(message);
-  }
-});
-
-// useHead({
-//   title: "Login - Fitness Center",
-//   meta: [
-//     { name: "description", content: "Sign in to your fitness center account to access your workouts, sessions, and progress." },
-//   ],
-// });
 </script>

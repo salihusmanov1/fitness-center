@@ -1,37 +1,34 @@
 <template>
   <article
-    class="grid grid-cols-1 sm:grid-cols-[40%_60%]"
+    class="grid grid-cols-1 w-full"
     role="gridcell"
-    :aria-label="`Workout session: ${session?.class_type?.name}`"
+    :aria-label="`Workout session: ${session?.name}`"
   >
-    <div class="w-full h-full overflow-hidden">
-      <NuxtImg
-        src="/pr-session.jpg"
-        :alt="`${session?.class_type?.name} workout session image`"
-        class="w-full h-full object-cover"
-        loading="lazy"
-      />
-    </div>
-
-    <div class="h-full flex flex-col justify-center items-start gap-4 p-8 border border-gray-300 sm:border-l-0">
+    <div class="h-full flex flex-col justify-center items-start gap-4 p-8 border border-gray-300">
       <h2 class="text-sm sm:text-lg font-semibold">
-        {{ session?.class_type?.name }}
+        {{ session?.name }}
       </h2>
-      <div class="text-xs sm:text-sm font-light">
+      <div class="text-sm sm:text-base font-light">
         <p>
-          <span class="sr-only">Duration: </span>{{ session.duration_minutes }} minutes
+          <span class="font-bold">Date: </span>{{ date }}
         </p>
         <p>
-          <span class="sr-only">Price: </span>{{ session.price }} {{ getCurrencySign(session.currency) }}
+          <span class="font-bold">Time: </span>{{ time }}
+        </p>
+        <p>
+          <span class="font-bold">Duration: </span>{{ session.duration_minutes }} minutes
+        </p>
+        <p>
+          <span class="font-bold">Price: </span>{{ session.price }} {{ getCurrencySign(session.currency) }}
         </p>
       </div>
 
       <button
-        class="btn btn-primary btn-sm sm:btn-md stretched-text tracking-tighter sm:text-lg"
-        :aria-label="`Book ${session?.class_type?.name} session for ${session.price} ${getCurrencySign(session.currency)}`"
-        @click="navigateTo(`/session/${session.id}`)"
+        class="btn btn-primary stretched-text tracking-tighter text-lg"
+        :aria-label="`Book ${session?.name} session`"
+        @click="navigateTo(`/session/${session?.id}`)"
       >
-        Book Now
+        Book
       </button>
     </div>
   </article>
@@ -39,13 +36,16 @@
 
 <script setup>
 const { getCurrencySign } = useCurrency();
+const { formatTime } = useTimeFormatter();
 
-defineProps({
+const props = defineProps({
   session: {
     type: Object,
     required: true,
   },
 });
+
+const { date, time } = formatTime(props.session.start_at);
 </script>
 
 <style scoped>

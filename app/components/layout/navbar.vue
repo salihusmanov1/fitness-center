@@ -86,14 +86,14 @@
     id="mobile-sidebar"
     role="dialog"
     aria-modal="true"
-    class="fixed top-0 right-0 h-full w-[70%] bg-white shadow-lg z-50 transform transition-transform duration-300"
+    class="fixed top-0 right-0 h-full w-[70%] bg-white shadow-lg z-70 transform transition-transform duration-300"
     :class="isSidebarOpen ? 'translate-x-0' : 'translate-x-full'"
   >
     <div
       class="flex flex-col items-end text-2xl px-8 space-y-8"
     >
       <button
-        class="h-20 text-[#692fd4] flex items-center"
+        class="h-20 text-primary flex items-center"
         aria-label="Close menu"
         @click="isSidebarOpen=false"
       >
@@ -153,8 +153,12 @@ const navList = [
     to: "/",
   },
   {
-    label: "SESSIONS",
-    to: "/sessions",
+    label: "CLASSES",
+    to: "/classes",
+  },
+  {
+    label: "PRIVATE TRAINING",
+    to: "/private-training",
   },
   {
     label: "PLANS & PRICING",

@@ -1,5 +1,5 @@
 <template>
-  <section class="p-4">
+  <section class="px-4 py-16">
     <div class="max-w-md mx-auto">
       <div class="w-full h-full flex justify-center items-center">
         <div class="w-full space-y-6">
@@ -12,7 +12,7 @@
             </p>
           </div>
 
-          <form @submit="onSubmit">
+          <form @submit.prevent="handleRegister">
             <div class="grid lg:grid-cols-2 grid-cols-1 gap-x-4 gap-y-0">
               <UiFormInput
                 v-model="name"
@@ -106,13 +106,13 @@
             <button
               type="submit"
               class="btn btn-primary btn-block stretched-text text-lg mt-4"
-              :disabled="isLoading || !agreeToTerms"
+              :disabled="isSubmitDisabled"
             >
               <span
                 v-if="isLoading"
                 class="loading loading-spinner loading-sm"
               />
-              {{ isLoading ? 'Creating account...' : 'Create Account' }}
+              {{ submitButtonText }}
             </button>
           </form>
 
@@ -150,7 +150,7 @@
                 to="/login"
                 class="text-primary hover:opacity-80 transition-opacity font-medium"
               >
-                Sign in here
+                Sign in
               </NuxtLink>
             </p>
           </div>
@@ -161,45 +161,25 @@
 </template>
 
 <script setup>
-import { toTypedSchema } from "@vee-validate/yup";
-import * as yup from "yup";
+const {
+  email,
+  name,
+  surname,
+  phone,
+  password,
+  repeated_password,
+  agreeToTerms,
+  errors,
+  isLoading,
+  isSubmitDisabled,
+  submitButtonText,
+  handleRegister,
+} = useRegister();
 
-const authStore = useAuthStore();
-
-const schema = toTypedSchema(
-  yup.object({
-    email: yup.string().required("Email is required").email("Invalid email address"),
-    name: yup.string().required("First name is required"),
-    surname: yup.string().required("Last name is required"),
-    phone: yup.string().required("Phone number is required"),
-    password: yup.string().required("Password is required"),
-    repeated_password: yup.string().required("Confirm password is required").oneOf([yup.ref("password"), null], "Passwords must match"),
-    agreeToTerms: yup.boolean().required("You must agree to the terms and conditions"),
-  }),
-);
-
-const { errors, handleSubmit, defineField } = useForm({
-  validationSchema: schema,
+useHead({
+  title: "Register - NV Club",
+  meta: [
+    { name: "description", content: "Create your NV Club account to access personalized workouts, sessions, and track your progress." },
+  ],
 });
-
-const [email] = defineField("email");
-const [name] = defineField("name");
-const [surname] = defineField("surname");
-const [phone] = defineField("phone");
-const [password] = defineField("password");
-const [repeated_password] = defineField("repeated_password");
-const [agreeToTerms] = defineField("agreeToTerms");
-
-const isLoading = ref(false);
-
-const onSubmit = handleSubmit(async (values) => {
-  await authStore.signup(values);
-});
-
-// useHead({
-//   title: "Register - Fitness Center",
-//   meta: [
-//     { name: "description", content: "Create your fitness center account to access personalized workouts, sessions, and track your progress." },
-//   ],
-// });
 </script>

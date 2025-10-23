@@ -1,21 +1,17 @@
 <template>
   <div class="p-4">
-    <section class="h-[380px] text-center flex flex-col items-center gap-4 justify-end">
+    <section class="h-[250px] text-center flex flex-col items-center gap-4 justify-end">
       <h1 class="sm:text-9xl text-6xl font-bold stretched-text tracking-tighter scale-y-105 italic">
-        ALL SESSIONS
+        ALL CLASSES
       </h1>
 
       <p class="sm:text-xl text-lg font-light">
-        Book a Workout Session
-      </p>
-      <p class="sm:text-lg/8 text-base/8 text-gray-500">
-        I'm a paragraph. Click here to add your own text and edit me. <br>
-        It's easy. Just click "Edit Text" or double click me to add your own <br> content and make changes to the font.
+        Book a Workout Class
       </p>
     </section>
     <section
       class="lg:max-w-[1200px] mx-auto flex items-center my-20 flex-col gap-16"
-      aria-label="Sessions listing"
+      aria-label="Classes listing"
     >
       <template v-if="data?.data.length === 0">
         <div
@@ -29,7 +25,7 @@
             size="48px"
             aria-hidden="true"
           />
-          <p>No sessions found</p>
+          <p>No classes found</p>
         </div>
       </template>
 
@@ -40,11 +36,11 @@
           aria-live="assertive"
         >
           <p class="text-error">
-            Failed to load sessions. Please try again.
+            Failed to load classes. Please try again.
           </p>
           <button
             class="btn btn-primary btn-outline"
-            :aria-label="status === 'pending' ? 'Refreshing sessions' : 'Refresh sessions'"
+            :aria-label="status === 'pending' ? 'Refreshing classes' : 'Refresh classes'"
             :disabled="status === 'pending'"
             @click="refresh"
           >
@@ -62,30 +58,29 @@
         <div
           class="grid grid-cols-2 gap-4 relative"
           role="grid"
-          aria-label="Available workout sessions"
+          aria-label="Available workout classes"
         >
           <div
             v-if="status === 'pending'"
             class="absolute inset-0 bg-white/50 z-10"
             role="status"
             aria-live="polite"
-            aria-label="Loading sessions"
+            aria-label="Loading classes"
           >
             <div class="flex items-center justify-center h-full">
               <div
                 class="loading loading-bars loading-lg"
                 aria-hidden="true"
               />
-              <span class="sr-only">Loading sessions, please wait</span>
+              <span class="sr-only">Loading classes, please wait</span>
             </div>
           </div>
           <template
-            v-for="(session, index) in data?.data"
-            :key="session.id"
+            v-for="(classType, index) in data?.data"
+            :key="index"
           >
-            <SessionsCard
-              :session="session"
-              :aria-label="`Session ${index + 1}: ${session?.class_type?.name}`"
+            <ClassesCard
+              :class-type="classType"
             />
           </template>
         </div>
@@ -94,9 +89,9 @@
       <nav
         v-if="data?.data.length !== 0 && !error"
         class="w-full flex justify-center"
-        aria-label="Sessions pagination"
+        aria-label="Classes pagination"
       >
-        <SessionsPagination
+        <UiPagination
           :total="data?.meta.total"
           :current="data?.meta.current_page"
           :last="data?.meta.last_page"
@@ -113,8 +108,8 @@ const client = useSanctumClient();
 
 const metaCurrentPage = ref(1);
 
-const { data, status, error, refresh } = await useAsyncData("sessions", () =>
-  client("/api/class_sessions", {
+const { data, status, error, refresh } = await useAsyncData("classes", () =>
+  client("/api/class_types", {
     params: {
       page: metaCurrentPage.value,
       per_page: 6,
@@ -128,16 +123,16 @@ const updateCurrentPage = (page) => {
 };
 </script>
 
-<style scoped>
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-</style>
+  <style scoped>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:pr-10">
+  <div>
     <div class="flex items-center justify-between mb-6 ">
       <button
         class="btn-sm cursor-pointer hover:bg-transparent hover:text-gray-400 transition-colors duration-200"
@@ -72,12 +72,20 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  selectedDate: {
+    type: Date,
+    default: null,
+  },
+});
+
+const selectedDate = ref(props.selectedDate ? props.selectedDate : new Date());
+
 const emit = defineEmits(["update:modelValue"]);
 
 const currentDate = new Date();
 const currentMonth = ref(currentDate.getMonth());
 const currentYear = ref(currentDate.getFullYear());
-const selectedDate = ref(new Date());
 
 const dayHeaders = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

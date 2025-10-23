@@ -1,5 +1,5 @@
 export const useFormatDate = () => {
-  const formatSelectedDate = (date) => {
+  const formatDate = (date) => {
     if (!date) return "";
     return date.toLocaleDateString("en-US", {
       weekday: "long",
@@ -10,6 +10,6 @@ export const useFormatDate = () => {
   };
 
   return {
-    formatSelectedDate,
+    formatDate,
   };
 };

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
     "@nuxt/icon",
-    "@nuxt/test-utils",
+    "@nuxt/test-utils/module",
     "nuxt-auth-sanctum",
     [
       "@vee-validate/nuxt",
@@ -16,6 +16,7 @@ export default defineNuxtConfig({
       },
     ],
     "@pinia/nuxt",
+    "@vueuse/nuxt",
   ],
   devtools: { enabled: true },
   app: {
@@ -36,8 +37,15 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/main.css"],
+  content: {
+    watch: {
+      hostname: "172.18.0.56",
+      port: 5173,
+    },
+
+  },
   devServer: {
-    host: "localhost",
+    host: "172.18.0.56",
     port: 5173,
   },
 
@@ -67,7 +75,7 @@ export default defineNuxtConfig({
     endpoints: {
       csrf: "/sanctum/csrf-cookie",
       login: "/api/login",
-      logout: "/logout",
+      logout: "/api/logout",
       user: "/api/me",
     },
     csrf: {
@@ -83,7 +91,7 @@ export default defineNuxtConfig({
       onLogin: "/",
       onLogout: "/",
       onAuthOnly: "/login",
-      onGuestOnly: "/",
+      onGuestOnly: "/profile",
     },
     globalMiddleware: {
       enabled: false,
